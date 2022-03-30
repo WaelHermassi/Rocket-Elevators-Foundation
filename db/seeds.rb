@@ -143,3 +143,4 @@ end
     fakeDate = Faker::Date.between(from: '2017-09-23', to: '2022-01-25')
     Elevator.create!(column_id: columnIdList.sample, serial_number: Faker::IDNumber.valid_south_african_id_number, model: model.sample, typing: typing.sample, status: status.sample, date_of_commissioning: fakeDate + rand(15..30).day, date_of_last_inspection: fakeDate + rand(8..12).months, information: Faker::Company.buzzword, notes: Faker::ChuckNorris.fact, created_at: fakeDate)
 end
+
