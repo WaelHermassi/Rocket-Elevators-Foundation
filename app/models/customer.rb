@@ -1,4 +1,5 @@
 class Customer < ApplicationRecord
+  has_many :buildings
   belongs_to :user, dependent: :destroy
   belongs_to :address, dependent: :destroy
 

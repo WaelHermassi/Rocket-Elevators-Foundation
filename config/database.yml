@@ -49,8 +49,8 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: Rocket_Elevators_Information_System_production
-  username: Rocket_Elevators_Information_System
-  password: <%= ENV['ROCKET_ELEVATORS_INFORMATION_SYSTEM_DATABASE_PASSWORD'] %>
+# production:
+#   <<: *default
+#   database: Rocket_Elevators_Information_System_production
+#   username: Rocket_Elevators_Information_System
+#   password: <%= ENV['ROCKET_ELEVATORS_INFORMATION_SYSTEM_DATABASE_PASSWORD'] %>

@@ -27,5 +27,6 @@ module RocketElevatorsInformationSystem
     config.middleware.use ActionDispatch::Flash
     config.middleware.use Rack::MethodOverride
     config.middleware.use ActionDispatch::Session::CookieStore, {:key=>"_rocket_elevators_information_system_session"}
+    
   end
 end

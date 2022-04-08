@@ -167,7 +167,53 @@ namespace :warehouse do
         end
         puts "... a total of #{count} customer data was saved to data warehouse at table: dim_customer."
     end
+    #############################################################################################################
+    #############################################################################################################
 
+    task :create_factIntervention, [:db_name] do |task, args|
+        puts "connected to #{args[:db_name]}"
+        
+        conn = PG::Connection.open(:dbname => "#{args[:db_name]}")
+        # conn = PG::Connection.open(:host => host_name, :user => user_name, :password => pwd, :dbname => "#{args[:db_name]}")
+        conn.exec("CREATE TABLE IF NOT EXISTS factIntervention (
+            id SERIAL PRIMARY KEY,
+            employee_id INTEGER NOT NULL,
+            building_id INTEGER NOT NULL,
+            battery_id INTEGER,
+            column_id INTEGER,
+            elevator_id INTEGER,
+            start_date_time_of_intervention TIMESTAMP NOT NULL,
+            end_date_time_of_intervention TIMESTAMP,
+            result VARCHAR(255) NOT NULL,
+            report VARCHAR(255) NOT NULL,
+            status VARCHAR(255) NOT NULL
+
+        )");
+        puts "...factIntervention created"
+    end
+    task :import_factIntervention, [:db_name] => :environment do |task, args|        
+        puts "Connected to #{args[:db_name]}"
+        
+        #conn = PG::Connection.open(:dbname => "#{args[:db_name]}")
+        conn = PG::Connection.open(:host => host_name, :user => user_name, :password => pwd, :dbname => "#{args[:db_name]}")
+        
+        (1..80).each do |i|
+            id = i
+            employee_id = Faker::Number.between(from: 1, to: 11)
+            building_id = Faker::Number.between(from: 1, to: 75)
+            battery_id = Faker::Number.between(from: 1, to: 75)
+            column_id = Faker::Number.between(from: 1, to: 150)
+            elevator_id = Faker::Number.between(from: 1, to: 450)
+            start_date_time_of_intervention =  Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :long)
+            end_date_time_of_intervention =  Faker::Time.between(from: DateTime.now - 1, to: DateTime.now + 1, format: :long)
+            result = ["Success","Failure","Incomplete"].sample
+            report = "Let me tell you about my intervention."
+            status = ["Pending","InProgress","Interrupted","Resumed","Complete"].sample
+            conn.exec("INSERT INTO factIntervention (id,employee_id,building_id,battery_id,column_id,elevator_id,start_date_time_of_intervention,end_date_time_of_intervention,result,report,status) VALUES (#{id},#{employee_id},#{building_id},#{battery_id},#{column_id},#{elevator_id},'#{start_date_time_of_intervention}','#{end_date_time_of_intervention}','#{result}','#{report}','#{status}')")
+        end
+        puts "... a total of  data was saved to warehouse at table: factIntervention."
+    end
+       
 end
 
     ########################################################################

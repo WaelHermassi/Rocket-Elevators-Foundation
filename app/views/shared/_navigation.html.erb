@@ -34,6 +34,7 @@
                         <li><%= link_to "CLIENTS", root_path(anchor: 'clients') %></li>
                         <li><%= link_to "QUOTE", quotes_path %></li>
                         <li><%= link_to "CONTACT", root_path(anchor: 'contact') %></li>
+                        <li><%= link_to "INTERVENTION", intervention_path %></li>
                         
                         <% if current_user %>
                             <li><%= link_to "SIGN OUT", destroy_user_session_path, method: :delete %></li>
