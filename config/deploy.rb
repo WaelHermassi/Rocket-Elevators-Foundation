@@ -7,7 +7,7 @@ set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rben
 set :rbenv_map_bins, %w{rake gem bundle ruby rails puma pumactl}
 set :rbenv_roles, :all # default value
 
-set :application, "MarcAndreRamirez"
+set :application, "WaelHermassi"
 set :repo_url, "https://github.com/dremangry/Rocket_Elevators_API"
 
 # Default branch is :master
