@@ -46,7 +46,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'freshdesk-api-v2-rails'
 gem 'net-http'
-gem 'uri'
+# gem 'uri'
 gem 'json', '~> 2.6', '>= 2.6.1'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
