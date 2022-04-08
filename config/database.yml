@@ -8,27 +8,38 @@
 #
 # And be sure to use new-style password hashing:
 #   https://dev.mysql.com/doc/refman/5.7/en/password-hashing.html
+default: &default  
+  adapter: mysql2  
+  encoding: utf8  
+  username: codeboxx  
+  password: Codeboxx1!  
+  host: codeboxx.cq6zrczewpu2.us-east-1.rds.amazonaws.com  
+  port: 3306
+
+development:  
+  <<: *default  
+  database: wael
 #
-default: &default
-  adapter: mysql2
-  encoding: utf8
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password: 23197931
-  # socket: /var/run/mysqld/mysqld.sock
+# default: &default
+#   adapter: mysql2
+#   encoding: utf8
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#   username: root
+#   password: 23197931
+#   # socket: /var/run/mysqld/mysqld.sock
 
 
 
-development:
-    <<: *default
-    database: wael
+# development:
+#     <<: *default
+#     database: wael
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
-test:
-    <<: *default
-    database: wael
+# # Warning: The database defined as "test" will be erased and
+# # re-generated from your development database when you run "rake".
+# # Do not set this db to the same as development or production.
+# test:
+#     <<: *default
+#     database: wael
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is

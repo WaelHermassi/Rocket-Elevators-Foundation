@@ -35,7 +35,6 @@ class InterventionController < ApplicationController
        end
     end
     end
-   # listing the columns belonging to the battery
     def get_column
        if params[:battery].present?
            @columns = Battery.find(params[:battery]).columns
@@ -50,7 +49,6 @@ class InterventionController < ApplicationController
            end
        end
     end
-   # Listing the elevators belonging to the column
     def get_elevator
        if params[:column].present?
            @elevators = Column.find(params[:column]).elevators
@@ -71,11 +69,7 @@ class InterventionController < ApplicationController
     def author_intervention
     @interventions = Intervention.where(:user_id => current_user.id)
 end
-
-
-
     def create 
-        
     
        @intervention = Intervention.new(intervention_params)
        @intervention.author = current_user.id
