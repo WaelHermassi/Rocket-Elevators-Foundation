@@ -22,7 +22,7 @@ module RailsAdmin
                     'fa fa-map-marker' # use any of font-awesome icons
                 end
             end
-               
+                           
         end
     end
 end

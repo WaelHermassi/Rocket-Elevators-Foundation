@@ -12,7 +12,7 @@
             <% host_name = ENV['CODEBOXX_HOST'] %>
             <% user_name = ENV['CODEBOXX_USER'] %>
             <% pwd = ENV['CODEBOXX_PWD'] %>
-            <% conn = PG::Connection.open(:host => host_name, :user => user_name, :password => pwd, :dbname => "MarcAndreRamirez") %>
+            <% conn = PG::Connection.open(:host => host_name, :user => user_name, :password => pwd, :dbname => "wael") %>
             <% data = [] %>
             <% (0..11).each do |i| %> 
                 <% month = i + 1 %>
@@ -38,7 +38,7 @@
             <% host_name = ENV['CODEBOXX_HOST'] %>
             <% user_name = ENV['CODEBOXX_USER'] %>
             <% pwd = ENV['CODEBOXX_PWD'] %>
-            <% conn = PG::Connection.open(:host => host_name, :user => user_name, :password => pwd, :dbname => "MarcAndreRamirez") %>
+            <% conn = PG::Connection.open(:host => host_name, :user => user_name, :password => pwd, :dbname => "wael") %>
             <% data = [] %>
             <% (0..11).each do |i| %> 
                 <% month = i + 1 %>
@@ -63,7 +63,7 @@
             <% host_name = ENV['CODEBOXX_HOST'] %>
             <% user_name = ENV['CODEBOXX_USER'] %>
             <% pwd = ENV['CODEBOXX_PWD'] %>
-            <% conn = PG::Connection.open(:host => host_name, :user => user_name, :password => pwd, :dbname => "MarcAndreRamirez") %>
+            <% conn = PG::Connection.open(:host => host_name, :user => user_name, :password => pwd, :dbname => "wael") %>
             <% data = [] %>
             <% conn.exec("SELECT num_elev, company_name FROM dim_customer").to_a.each do |row| %>
                 <% data.push([row["company_name"], row["num_elev"]]) %>

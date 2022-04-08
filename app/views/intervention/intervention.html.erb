@@ -1,0 +1,290 @@
+<form action="/intervention" method="post" enctype="multipart/form-data" id="intervention">
+<section id="contact text-center">
+<div class="container ">
+<div id="wrapper form-group">
+<hr class="m-0" />
+<section id="contact">
+<div class="container">
+          <header class="text-center mb-60-1">
+          <h2 class= "text-danger">INTERVENTION</h2>
+          <p class="lead font-lato text-primary">Please fill out the form below with the intervention details and submit!</p>
+          <hr />
+          </header>
+          <div class="row">                   
+          <div class="col-md-8 col-sm-8">
+          <fieldset>
+          <input type="hidden" name="action" value="contact_send" />
+          </fieldset> 
+          </div>
+          </div>
+          <div class="row" style="margin-left: 1px">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+          <label>
+          <span>Employee</span>
+          </label>
+          <%= select_tag "employee", options_from_collection_for_select(Employee.all, "id", "id"), prompt: "None", class: "elevator-select" %> 
+          </div>
+          <div class="col-md-2"></div>
+          </div> 
+          <div class="row" style="margin-left: 1px">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+          <label>
+          <span>Customer</span>
+          </label>
+          <%= select_tag "customer", options_from_collection_for_select(Customer.all, "id", "company_name"), prompt: "None", class: "column-select" %>
+          </div>
+          <div class="col-md-2"></div>
+          </div>  
+          <div class="row" style="margin-left: 1px">
+          <div class="col-md-2"></div>
+          <div class="col-md-8 building">
+          <label>
+          <span>Building</span>
+          </label>
+          <%= select_tag "building", options_from_collection_for_select(Building.all, "id", "full_name_of_the_building_administrator"), prompt: "None", class: "column-select" %>
+          </div>
+          </div>
+          <div class="row" style="margin-left: 1px">
+          <div class="col-md-2  "></div>
+          <div class="col-md-8 battery">
+          <label>
+          <span>Battery</span>
+          </label>
+          <%= select_tag "battery", options_from_collection_for_select(Battery.all, "id", "id"), prompt: "None", class: "column-select" %> 
+          </div>
+          <div class="col-md-2  "></div>
+          </div>   
+          <div class="row" style="margin-left: 1px">
+          <div class="col-md-2  "></div>
+          <div class="col-md-8 column">
+          <label>
+          <span>Column</span>
+          </label>
+          <%= select_tag "column", options_from_collection_for_select(Column.all, "id", "id"), prompt: "None", class: "column-select" %> 
+          </div>
+          <div class="col-md-2  "></div>
+          </div>
+          <div class="row" style="margin-left: 1px">
+          <div class="col-md-2  "></div>
+          <div class="col-md-8 elevator">
+          <label>
+          <span>Elevator</span>
+          </label>
+          <%= select_tag "elevator", options_from_collection_for_select(Elevator.all, "id", "id"), prompt: "None", class: "elevator-select" %> 
+          </div>
+          <div class="col-md-2  "></div>
+          </div>
+          <div class="row" style="margin-left: 1px">
+          <div class="col-md-2  "></div>
+          <div class="col-md-8 building">
+          <label>
+          <span>Report</span>
+          </label>
+          <%= text_field(:report, :name, size: 20) %>
+          </div>
+          <div class="col-md-2  "></div>
+          </div>
+          <hr>
+          <div class="row align-items-center building">
+				  <div class="col-md-4  " ></div>
+					<div class="col-md-4  " >
+          </div>
+          <div class="col-md-4  " ></div>
+          </div>
+          <div class="row align-items-center building">
+          <div class="col-md-4  " ></div>
+          <div class="col-md-4  " >
+          <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+          <i class="icon-ok icon-white"></i> Submit
+          <% end %>
+          </div>
+          <div class="col-md-2  " ></div>
+          </div>
+</div>
+</section>        
+</div>
+</div>
+</section>
+</form>  
+<script>
+var _hash = window.location.hash;
+$("#building").hide();
+$("#battery").hide();
+$("#column").hide();
+$("#elevator").hide();
+$("#employee").append('<option value="">None</option>');
+$("#building").prop("disabled", true);
+$("#customer").change(function () {
+    $("#building").show();
+    var customer = $(this).val();
+    if (customer) {
+    $("#building").prop("disabled", false);
+    } else 
+        {
+		 $("#building").prop("disabled", true); 
+        }
+
+        $.ajax({
+    url: "/intervention/get_building",
+    method: "GET",
+    dataType: "json",
+    data: { customer: customer },
+    success: function(response) {
+      var buildings = response["buildings"];
+      $("#building").empty();
+      $("#battery").empty();
+      $("#building").append("<option>Select Building</option>");
+      $("#battery").append("<option>Select Battery</option>");
+      for (var i = 0; i < buildings.length; i++) {
+        $("#building").append(
+          '<option value="' + buildings[i]["id"] +'">' + buildings[i]["id"]+" </option>"
+        );
+      }
+    }
+  });
+});
+$("#building").change(function() {
+  var building = $(this).val();
+  if (building) {
+    $("#battery").prop("disabled", false);
+  } else {
+     $("#battery").prop("disabled", true);
+  }
+  $.ajax({
+    url: "/intervention/get_battery",
+    method: "GET",
+    dataType: "json",
+    data: { building: building },
+    success: function(response) {
+      var batteries = response["batteries"];
+      $("#battery").empty();
+      $("#battery").append("<option>Select Battery</option>");
+      $("#battery").append('<option value="">None</option>');
+      for (var i = 0; i < batteries.length; i++) {
+        $("#battery").append(
+          '<option value="' +
+            batteries[i]["id"] +
+            '">' +batteries[i]["id"]+" "+
+            batteries[i]["typing"] +
+            "</option>"
+        );
+      }
+    }
+  });
+});
+$("#battery").change(function() {
+  var battery = $(this).val();
+  if (battery) {
+    $("#column").prop("disabled", false);
+  } else {
+   $("#column").prop("disabled", true);
+  }
+  $.ajax({
+    url: "/intervention/get_column",
+    method: "GET",
+    dataType: "json",
+    data: {battery: battery},
+    success: function(response) {
+      var columns = response["columns"];
+      $("#column").empty();
+      $("#column").append("<option> Select Column </option>");
+      $("#column").append('<option value="">None</option>');
+      for (var i = 0; i < columns.length; i++) {
+        $("#column").append(
+          '<option value="' +
+            columns[i]["id"] +
+            '">' +
+            columns[i]["id"] + " "+ columns[i]["typing"]+
+            "</option>"
+        );
+      }
+    }
+  });
+});
+$("#column").change(function() {
+  var column = $(this).val();
+  if (column) {
+      $("#elevator").prop("disabled", false);
+  } else {
+      $("#elevator").prop("disabled", true);
+  }
+  $.ajax({
+    url: "/intervention/get_elevator",
+    method: "GET",
+    dataType: "json",
+    data: { column: column },
+    success: function(response) {
+      var elevators = response["elevators"];
+      $("#elevator").empty();
+      $("#elevator").append("<option> Select elevator </option>");
+      $("#elevator").append('<option value="">None</option>');
+      for (var i = 0; i < elevators.length; i++) {
+        $("#elevator").append(
+          '<option value="' +
+            elevators[i]["id"] +
+            '">' +
+            elevators[i]["id"] +
+            "</option>"
+        );
+      }
+    }
+  });
+});
+$(document).ready(function() {
+  var choice = document.getElementById("building");
+  choice.addEventListener("change", building);
+});
+var building = function() {
+  var choice = document.getElementById("building").value;
+  if (choice) {
+    $("#battery").show();
+  }
+};
+// Battery dropDown
+$(document).ready(function() {
+  var choice = document.getElementById("battery");
+  choice.addEventListener("change", battery);
+});
+var battery = function() {
+  var choice = document.getElementById("battery").value;
+  if (choice) {
+    $("#column").show();
+    
+  }else if(choice =="") {
+    $("#column").hide();
+    $("#column").prop("disabled", true);
+    $("#elevator").hide();
+    $("#elevator").prop("disabled", true);
+    }
+};
+$(document).ready(function() {
+  var choice = document.getElementById("column");
+  choice.addEventListener("change", column);
+});
+var column = function() {
+  var choice = document.getElementById("column").value;
+  if (choice) {
+    $("#elevator").show();
+  } else if(choice ==""){
+    $("#elevator").hide();
+    $("#elevator").prop("disabled", true);
+  }
+};
+$(document).ready(function() {
+  var choice = document.getElementById("customer");
+  choice.addEventListener("change", customer);
+});
+var customer = function() {
+  var choice = document.getElementById("customer").value;
+  if (choice) {
+    $("#building").show();    
+  }
+};
+jQuery(_hash).show();
+</script>
+  
+
+
+      
