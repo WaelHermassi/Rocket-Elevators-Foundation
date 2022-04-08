@@ -200,7 +200,7 @@ namespace :warehouse do
         (1..80).each do |i|
             id = i
             employee_id = Faker::Number.between(from: 1, to: 11)
-            building_id = Faker::Number.between(from: 1, to: 11)
+            building_id = Faker::Number.between(from: 1, to: 75)
             battery_id = Faker::Number.between(from: 1, to: 75)
             column_id = Faker::Number.between(from: 1, to: 150)
             elevator_id = Faker::Number.between(from: 1, to: 450)
@@ -211,8 +211,9 @@ namespace :warehouse do
             status = ["Pending","InProgress","Interrupted","Resumed","Complete"].sample
             conn.exec("INSERT INTO factIntervention (id,employee_id,building_id,battery_id,column_id,elevator_id,start_date_time_of_intervention,end_date_time_of_intervention,result,report,status) VALUES (#{id},#{employee_id},#{building_id},#{battery_id},#{column_id},#{elevator_id},'#{start_date_time_of_intervention}','#{end_date_time_of_intervention}','#{result}','#{report}','#{status}')")
         end
-        end
         puts "... a total of  data was saved to warehouse at table: factIntervention."
+    end
+       
 end
 
     ########################################################################

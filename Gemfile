@@ -44,7 +44,10 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'freshdesk-api-v2-rails'
+gem 'net-http'
+gem 'uri'
+gem 'json', '~> 2.6', '>= 2.6.1'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -80,6 +83,10 @@ group :development do
   gem 'capistrano3-puma', github: "seuros/capistrano-puma"
   gem 'ed25519', '>= 1.2', '< 2.0'
   gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
+  gem "graphiql-rails"
+  gem "graphql", "~> 1.9"
+  gem 'simple_form'
+ 
 
 end
 
@@ -93,3 +100,4 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
