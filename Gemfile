@@ -86,6 +86,13 @@ group :development do
   gem "graphiql-rails"
   gem "graphql", "~> 1.9"
   gem 'simple_form'
+   gem 'capistrano', '~> 3.10', require: false
+  gem 'capistrano-rbenv', '~> 2.2'
+  gem 'capistrano-rails', '~> 1.4', require: false
+  gem 'capistrano-bundler', '>= 1.1.0'
+  gem 'capistrano3-puma', github: "seuros/capistrano-puma"
+  gem 'ed25519', '>= 1.2', '< 2.0'
+  gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
  
 
 end
